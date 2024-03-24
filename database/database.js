@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const Sequelize = require('sequelize');
 
-const connection = new Sequelize(
+const database = new Sequelize(
     process.env.DATABASE_NAME, 
     process.env.DATABASE_USER, 
     process.env.DATABASE_PASSWORD,
@@ -13,4 +13,4 @@ const connection = new Sequelize(
         timezone: process.env.DATABASE_TIMEZONE
     });
 
-module.exports = connection;
+module.exports = database;
