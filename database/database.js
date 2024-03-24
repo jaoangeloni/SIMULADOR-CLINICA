@@ -1,13 +1,16 @@
+require('dotenv').config();
+
 const Sequelize = require('sequelize');
 
 const connection = new Sequelize(
-    'livro', 
-    'root', 
-    '12345',
+    process.env.DATABASE_NAME, 
+    process.env.DATABASE_USER, 
+    process.env.DATABASE_PASSWORD,
     {
-        host: 'localhost',
-        dialect: 'mysql',
-        timezone: '-03:00'
+        host: process.env.DATABASE_HOST,
+        port: process.env.DATABASE_PORT,
+        dialect: process.env.DATABASE_DIALECT,
+        timezone: process.env.DATABASE_TIMEZONE
     });
 
 module.exports = connection;
