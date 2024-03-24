@@ -1,0 +1,17 @@
+{
+  "name": "simulador-clinica",
+  "version": "1.0.0",
+  "description": "Projeto simples em Node.js que simula agendamento, atendimento e diagnósticos de exames entre pacientes e médicos.",
+  "main": "app.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.1"
+  }
+}
