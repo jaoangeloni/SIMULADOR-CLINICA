@@ -20,4 +20,6 @@ const Exame = database.define('pacientes', {
 Exame.belongTo(Paciente);
 Exame.belongTo(Medico);
 
+Exame.sync({force: true});
+
 module.exports = Exame;

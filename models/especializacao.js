@@ -14,4 +14,6 @@ const Especializacao = database.define('pacientes', {
     },
 })
 
+Especializacao.sync({force: true});
+
 module.exports = Especializacao;

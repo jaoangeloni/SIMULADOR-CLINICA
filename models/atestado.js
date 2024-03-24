@@ -26,4 +26,6 @@ const Atestado = database.define('pacientes', {
 
 Atestado.belongTo(Exame);
 
+Atestado.sync({force: true});
+
 module.exports = Atestado;

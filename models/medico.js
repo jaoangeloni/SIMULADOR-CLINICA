@@ -18,4 +18,6 @@ const Medico = database.define('pacientes', {
 
 Medico.belongTo(Especializacao);
 
+Medico.sync({force: true});
+
 module.exports = Medico;
