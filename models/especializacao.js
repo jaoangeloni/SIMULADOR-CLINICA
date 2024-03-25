@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const database = require('../database/database');
 
-const Especializacao = database.define('pacientes', {
+const Especializacao = database.define('especializacoes', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -14,6 +14,5 @@ const Especializacao = database.define('pacientes', {
     },
 })
 
-Especializacao.sync({force: true});
 
 module.exports = Especializacao;

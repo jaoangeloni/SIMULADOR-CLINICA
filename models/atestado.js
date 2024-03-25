@@ -3,7 +3,7 @@ const database = require('../database/database');
 
 const Exame = require('./exame');
 
-const Atestado = database.define('pacientes', {
+const Atestado = database.define('atestados', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -24,8 +24,6 @@ const Atestado = database.define('pacientes', {
     }
 })
 
-Atestado.belongTo(Exame);
-
-Atestado.sync({force: true});
+Atestado.belongsTo(Exame);
 
 module.exports = Atestado;

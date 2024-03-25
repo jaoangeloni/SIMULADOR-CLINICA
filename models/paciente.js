@@ -22,6 +22,5 @@ const Paciente = database.define('pacientes', {
     },
 })
 
-Paciente.sync({force: true});
 
 module.exports = Paciente;

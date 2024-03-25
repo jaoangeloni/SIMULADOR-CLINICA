@@ -3,21 +3,27 @@ const database = require('../database/database');
 
 const Especializacao = require('./especializacao');
 
-const Medico = database.define('pacientes', {
+const Medico = database.define('medicos', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    data_solicitacao : {
-        type: Sequelize.DATE,
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    senha: {
+        type: Sequelize.STRING,
         allowNull: false
     }
 })
 
-Medico.belongTo(Especializacao);
-
-Medico.sync({force: true});
+Medico.belongsTo(Especializacao);
 
 module.exports = Medico;
