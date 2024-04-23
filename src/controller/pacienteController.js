@@ -100,7 +100,6 @@ exports.login = (req, res, next) => {
         if(paciente != undefined)
         {
             const deuCerto = bcrypt.compareSync(senha, paciente.senha);
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
             if(deuCerto)
             {
                 req.session.login = {

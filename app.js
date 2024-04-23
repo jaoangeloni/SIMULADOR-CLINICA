@@ -10,7 +10,7 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-app.set('views', path.join(__dirname, '../frontend/views/'));
+app.set('views', path.join(__dirname, './frontend/views/'));
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -26,7 +26,7 @@ const pacienteRoute = require('./src/routes/pacienteRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../frontend/public')));
+app.use(express.static(path.join(__dirname, './frontend/public')));
 
 //Sincronizacao do banco de dados
 /*(async () => {
