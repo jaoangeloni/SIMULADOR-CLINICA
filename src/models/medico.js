@@ -26,4 +26,5 @@ const Medico = database.define('medicos', {
 
 Medico.belongsTo(Especializacao);
 
+
 module.exports = Medico;

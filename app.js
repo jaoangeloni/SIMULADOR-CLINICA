@@ -23,13 +23,16 @@ app.use(session({
 }));
 
 const pacienteRoute = require('./src/routes/pacienteRoute');
+const medicoRoute = require('./src/routes/medicoRoute');
+const exameRoute = require('./src/routes/exameRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './frontend/public')));
 
+/*
 //Sincronizacao do banco de dados
-/*(async () => {
+(async () => {
     
     const Paciente = require('./src/models/paciente');
     const Especializacao = require('./src/models/especializacao');
@@ -38,7 +41,8 @@ app.use(express.static(path.join(__dirname, './frontend/public')));
     const Atestado = require('./src/models/atestado');
 
     await database.sync();
-})()*/
+})() 
+*/
 
 database
     .authenticate()
@@ -50,10 +54,11 @@ database
     });
 
 app.use('/pacientes', pacienteRoute);
-
-app.use('/', checkLogin, (req, res, next) => {
-    res.render('index');
-});
+app.use('/medicos', medicoRoute);
+app.use('/exame', exameRoute)
+//app.use('/', checkLogin, (req, res, next) => {
+  //  res.render('index');
+//});
 
 app.listen(PORT, () => {
     console.log("Rodando na porta " + PORT);

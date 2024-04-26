@@ -23,5 +23,4 @@ const Paciente = database.define('pacientes', {
  
 })
 
-
 module.exports = Paciente;
