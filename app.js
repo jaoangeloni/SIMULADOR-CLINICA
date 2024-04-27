@@ -25,10 +25,11 @@ app.use(session({
 const pacienteRoute = require('./src/routes/pacienteRoute');
 const medicoRoute = require('./src/routes/medicoRoute');
 const exameRoute = require('./src/routes/exameRoute');
+const atestadoRoute = require('./src/routes/atestadoRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, './frontend/public')));
+app.use("./frontend/css" , express.static("./frontend/dist"));
 
 /*
 //Sincronizacao do banco de dados
@@ -55,7 +56,9 @@ database
 
 app.use('/pacientes', pacienteRoute);
 app.use('/medicos', medicoRoute);
-app.use('/exame', exameRoute)
+app.use('/exame', exameRoute);
+app.use('/atestado', atestadoRoute);
+
 //app.use('/', checkLogin, (req, res, next) => {
   //  res.render('index');
 //});

@@ -1,16 +1,13 @@
 <%- include('../partials/head.ejs') %>
-<%- include('../partials/menu.ejs') %>
 
-<br>
-<div class="container">
-    <br>
-    <div class="card">
+<div class="bg-red-400 flex items-start justify-center">
+    <div class="bg-red-400 flex items-start justify-center">
         <div class="card-header">
-            Novo paciente
+            <p class="text-red-500">Novo paciente</p>
         </div>
-        <div class="card-body">
+        <div class="w-2">
             <form method="post" action="/pacientes">
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3 ">
                     <input
                         type="text"
                         name="nome"
