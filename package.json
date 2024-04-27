@@ -4,7 +4,7 @@
   "description": "Projeto simples em Node.js que simula agendamento, atendimento e diagnósticos de exames entre pacientes e médicos.",
   "main": "app.js",
   "scripts": {
-    "dev": "concurrently \"nodemon\" \"npx tailwindcss -i ./frontend/public/css/input.css -o ./frontend/dist/output.css --watch\""
+    "dev": "concurrently \"nodemon\" \"npx tailwindcss -i ./frontend/public/css/input.css -o ./frontend/public/css/output.css --watch\""
   },
   "keywords": [],
   "author": "",

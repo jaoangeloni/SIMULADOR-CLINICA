@@ -85,7 +85,7 @@ exports.delete = (req, res, next) => {
 }
 
 exports.renderLogin = (req, res, next) => {
-    res.render('index', {msg: ''});
+    res.render('login', {msg: ''});
 }
 
 exports.login = (req, res, next) => {

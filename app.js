@@ -29,7 +29,7 @@ const atestadoRoute = require('./src/routes/atestadoRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("./frontend/css" , express.static("./frontend/dist"));
+app.use(express.static(path.join(__dirname,"/frontend/public")));
 
 /*
 //Sincronizacao do banco de dados
