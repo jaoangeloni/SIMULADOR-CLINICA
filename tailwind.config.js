@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: {
-
-    content: ["./frontend/**/*.ejs"],
-    
-  },
+  content: ["./frontend/**/*.{html,ejs}"],
 
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "wave": "url('/imgs/wave.svg')"
+      }
+    },
   },
   plugins: [],
 }
