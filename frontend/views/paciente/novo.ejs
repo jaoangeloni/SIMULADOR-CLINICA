@@ -5,7 +5,7 @@
 
         <div class="bg-white w-3/12 rounded-md flex flex-col items-center p-8">
 
-            <p class=" font-light text-2xl">CADASTRE-SE JÁ</p>
+            <p class=" font-light text-2xl">CADASTRE-SE JÁ!</p>
 
             <form method="post" action="/pacientes" class="w-full flex flex-col items-center gap-8 pt-8"
                 onsubmit="validarSenha(event)">
@@ -60,7 +60,7 @@
 
 
             if (senha.value !== confirmarSenha.value) {
-                msgErro.innerHTML = 'As senhas não coincidem.';
+                msgErro.innerHTML = 'As senhas não coincidem';
                 event.preventDefault();
             }
         }
