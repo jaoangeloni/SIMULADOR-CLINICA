@@ -15,7 +15,7 @@ No terminal, instale as dependências na pasta do projeto:
 npm i
 ```
 
-No terminal, rode o servidor
+No terminal, utilize o seguinte comando para rodar o servidor e buildar o front:
 ```
 npm run dev
 ```
