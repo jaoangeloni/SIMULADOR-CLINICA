@@ -13,7 +13,7 @@ exports.getAll = (req, res, next) => {
 }
 
 exports.renderNovo = (req, res, next) => {
-    res.render('paciente/novo');
+    res.render('paciente/novo', { msg: '' });
 }
 
 exports.create = (req, res, next) => {
@@ -40,7 +40,7 @@ exports.create = (req, res, next) => {
             });
         }
         else {
-            res.redirect('/pacientes');
+            res.render('paciente/novo', { msg: 'Email já cadastrado' })
         }
     });
 }

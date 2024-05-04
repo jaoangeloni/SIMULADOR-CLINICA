@@ -1,20 +1,19 @@
 const express = require('express');
 const Exame = require('../models/exame');
 const Atestado = require('../models/atestado');
-const bcrypt = require('bcryptjs');
 
 exports.create = (req, res, next) => {
     const diagnostico = req.body.diagnostico;
     const orientacao = req.body.orientacao;
     const data_emissao = req.body.data_emissao;
-    const exameId = req.body.exameId; 
+    const exameId = req.body.exameId;
 
     Exame.findOne({
         where: {
             id: exameId
         }
     }).then(exame => {
-        if(!exame){
+        if (!exame) {
             return res.status(404).json({
                 error: 'Exame nao encontrado!'
             })
@@ -41,7 +40,7 @@ exports.create = (req, res, next) => {
 
 
 exports.delete = (req, res, next) => {
-    const id = req.params.id; 
+    const id = req.params.id;
 
     Atestado.destroy({
         where: {

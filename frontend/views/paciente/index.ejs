@@ -5,41 +5,68 @@
         <div class="bg-white w-full rounded p-6 flex flex-col gap-4">
             <p class="font-light text-2xl">AGENDAR NOVA CONSULTA</p>
             <form action="" class="flex items-center justify-start  flex-wrap gap-2">
-                <select name="exames" id="exames" class="w-1/4 h-12 rounded-md bg-gray-200">
-                    <option value="">a</option>
-                    <option value="">b</option>
-                    <option value="">c</option>
-                </select>
 
-                <select name="medicos" id="medicos" class="w-1/4 h-12 rounded-md bg-gray-200">
-                </select>
+                <div class="flex flex-col w-1/4 ">
+                    <label for="exames">EXAMES DISPONÍVEIS:</label>
+                    <select name="exames" id="exames" class=" h-12 rounded-md bg-gray-200 outline-none">
+                        <option disabled selected>Selecione um exame</option>
+                    </select>
+                </div>
 
-                <input type="date" class=" w-1/4 h-12 rounded-md bg-gray-200">
+                <div class="flex flex-col w-1/4">
+                    <label for="medicos"><span id="especialista">MÉDICOS</span> DISPONÍVEIS:</label>
+                    <select name="medicos" id="medicos" class=" h-12 rounded-md bg-gray-200 outline-none">
+                        <option disabled selected>Selecione um exame</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col w-1/4">
+                    <label for="date">SELECIONE UMA DATA:</label>
+                    <input name="date" type="date" class="h-12 rounded-md bg-gray-200 outline-none">
+                </div>
 
                 <button type="submit" class=" w-1/4 h-12 bg-green-500 text-white rounded-md">AGENDAR EXAME</button>
             </form>
         </div>
 
         <div class="bg-white w-full rounded p-6 flex flex-col gap-4"></div>
+
     </div>
 
     <script>
-        fetch('especializacao/todos')
-        fetch('/medicos/todos')
+        const selectExame = document.getElementById('exames');
+        const selectMedico = document.getElementById('medicos');
+
+        function carregarMedicos(especializacaoId) {
+            fetch('/medicos/especializacaoid/' + especializacaoId)
+                .then(response => response.json())
+                .then(data => {
+                    selectMedico.innerHTML = "";
+
+                    data.medicos.forEach(medico => {
+                        const option = new Option(medico.nome, medico.id);
+                        selectMedico.add(option);
+                    });
+
+                });
+        }
+
+        fetch('/especializacao/')
             .then(response => response.json())
             .then(data => {
-                const medicos = data.medicos
-                const select = document.getElementById('medicos');
-
-                medicos.forEach(medico => {
-                    select.innerHTML = "";
-                    const option = document.createElement('option');
-                    option.value = medico.id;
-                    option.text = medico.nome;
-                    select.appendChild(option);
+                data.especializacoes.forEach(especializacao => {
+                    const option = new Option(especializacao.nome, especializacao.id);
+                    selectExame.add(option);
                 });
 
-            })
+                selectExame.addEventListener('change', () => {
+                    carregarMedicos(selectExame.value);
+                    const especialista = document.getElementById("especialista")
+                    especialista.innerHTML = selectExame.selectedOptions[0].text.toUpperCase() + 'S';
+                });
+
+
+            });
     </script>
 
     <%- include('../partials/footer.ejs') %>

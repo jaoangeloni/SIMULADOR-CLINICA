@@ -9,6 +9,7 @@ const verifyJWT = require('../middlewares/checkLogin');
 //router.post('/login', paciente.login);
 
 router.get('/todos', medico.getAll);
+router.get('/especializacaoid/:especializacaoid', medico.findBySpecId);
 router.get('/registro', medico.rederNovo);
 router.post('/novo', medico.create);
 //router.get('/:id', checkLogin, medico.renderEditar);

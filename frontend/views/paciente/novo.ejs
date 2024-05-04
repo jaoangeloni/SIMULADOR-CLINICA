@@ -47,7 +47,11 @@
                     <a href="/pacientes" class="text-red-500">Cancelar</a>
                 </div>
 
-                <p id="msgErro" class="text-red-500 font-bold"></p>
+                <% if(msg !='' ) { %>
+                    <p id="msgErro" class="text-red-500 font-bold">
+                        <%= msg %>
+                    </p>
+                    <% }%>
             </form>
         </div>
     </div>

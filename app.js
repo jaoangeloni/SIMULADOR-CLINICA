@@ -26,10 +26,12 @@ const pacienteRoute = require('./src/routes/pacienteRoute');
 const medicoRoute = require('./src/routes/medicoRoute');
 const exameRoute = require('./src/routes/exameRoute');
 const atestadoRoute = require('./src/routes/atestadoRoute');
+const especializacaoRoute = require('./src/routes/especializacaoRoute');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname,"/frontend/dist")));
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 /*
 //Sincronizacao do banco de dados
@@ -47,7 +49,7 @@ app.use(express.static(path.join(__dirname,"/frontend/dist")));
 
 database
     .authenticate()
-    .then(() =>{
+    .then(() => {
         console.log("Conexão estabelecida com banco de dados");
     })
     .catch(err => {
@@ -58,9 +60,11 @@ app.use('/pacientes', pacienteRoute);
 app.use('/medicos', medicoRoute);
 app.use('/exame', exameRoute);
 app.use('/atestado', atestadoRoute);
+app.use('/especializacao', especializacaoRoute);
+
 
 //app.use('/', checkLogin, (req, res, next) => {
-  //  res.render('index');
+//  res.render('index');
 //});
 
 app.listen(PORT, () => {
