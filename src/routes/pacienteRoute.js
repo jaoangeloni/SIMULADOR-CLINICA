@@ -9,7 +9,7 @@ router.get('/login', paciente.renderLogin);
 router.post('/login', paciente.login);
 
 router.get('/', checkLogin, paciente.getAll);
-router.get('/novo', paciente.rederNovo);
+router.get('/novo', paciente.renderNovo);
 router.post('/', paciente.create);
 router.get('/:id', checkLogin, paciente.renderEditar);
 router.post('/salvar', checkLogin, paciente.update);

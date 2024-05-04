@@ -1,37 +1,45 @@
 <%- include('../partials/head.ejs') %>
-<%- include('../partials/menu.ejs') %>
 
-<br>
-<div class="container">
-    <a href="/pacientes/novo" class="btn btn-primary">Novo Usuário</a>
-    <br>
-    <div class="card">
-        <div class="card-header">
-            Usuários Cadastrados
+    <div class="bg-blue-500 h-screen w-screen p-10 flex flex-col gap-10">
+
+        <div class="bg-white w-full rounded p-6 flex flex-col gap-4">
+            <p class="font-light text-2xl">AGENDAR NOVA CONSULTA</p>
+            <form action="" class="flex items-center justify-start  flex-wrap gap-2">
+                <select name="exames" id="exames" class="w-1/4 h-12 rounded-md bg-gray-200">
+                    <option value="">a</option>
+                    <option value="">b</option>
+                    <option value="">c</option>
+                </select>
+
+                <select name="medicos" id="medicos" class="w-1/4 h-12 rounded-md bg-gray-200">
+                </select>
+
+                <input type="date" class=" w-1/4 h-12 rounded-md bg-gray-200">
+
+                <button type="submit" class=" w-1/4 h-12 bg-green-500 text-white rounded-md">AGENDAR EXAME</button>
+            </form>
         </div>
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thread>
-                    <th class="col-5">Nome do Usuário</th>
-                    <th class="col-5">E-mail</th>
-                    <th class="col-2">Ações</th>
-                </thread>
-                <tbody>
-                    <% usuarios.forEach(usuario => { %>
-                        <tr>
-                            <td><%= usuario.nome %></td>
-                            <td><%= usuario.email %></td>
-                            <td>
-                                <a href="/pacientes/<%= paciente.id %>" class="btn btn-primary">Editar</a>
-                                <a href="/pacientes/delete/<%= paciente.id %>" class="btn btn-danger">Excluir</a>
-                            </td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        </div>
+
+        <div class="bg-white w-full rounded p-6 flex flex-col gap-4"></div>
     </div>
-</div>
 
+    <script>
+        fetch('especializacao/todos')
+        fetch('/medicos/todos')
+            .then(response => response.json())
+            .then(data => {
+                const medicos = data.medicos
+                const select = document.getElementById('medicos');
 
-<%- include('../partials/footer.ejs') %>
+                medicos.forEach(medico => {
+                    select.innerHTML = "";
+                    const option = document.createElement('option');
+                    option.value = medico.id;
+                    option.text = medico.nome;
+                    select.appendChild(option);
+                });
+
+            })
+    </script>
+
+    <%- include('../partials/footer.ejs') %>
