@@ -12,8 +12,7 @@ exports.getAll = (req, res, next) => {
     }).then(medicos => {
         res.status(200).json({ medicos: medicos });
     }).catch(err => {
-        console.error('Erro ao buscar médicos:', err);
-        res.status(500).json({ error: 'Erro interno do servidor' });
+        res.status(404).json({ error: err });
     });
 }
 

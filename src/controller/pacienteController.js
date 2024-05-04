@@ -8,12 +8,18 @@ exports.getAll = (req, res, next) => {
             ['nome', 'ASC']
         ]
     }).then(pacientes => {
-        res.render('paciente/index', { pacientes: pacientes })
-    })
+        res.status(200).json({ pacientes: pacientes });
+    }).catch(err => {
+        res.status(404).json({ error: err });
+    });
 }
 
-exports.renderNovo = (req, res, next) => {
-    res.render('paciente/novo', { msg: '' });
+exports.renderHome = (req, res, next) => {
+    res.render('paciente/home', { sessionData: req.session.login });
+}
+
+exports.renderRegistro = (req, res, next) => {
+    res.render('paciente/registro', { msg: '' });
 }
 
 exports.create = (req, res, next) => {
@@ -36,11 +42,11 @@ exports.create = (req, res, next) => {
                 email: email,
                 senha: senhaCriptografada
             }).then(() => {
-                res.redirect('/pacientes');
+                res.redirect('/pacientes/home');
             });
         }
         else {
-            res.render('paciente/novo', { msg: 'Email já cadastrado' })
+            res.render('paciente/registro', { msg: 'Email já cadastrado' })
         }
     });
 }
@@ -66,7 +72,7 @@ exports.update = (req, res, next) => {
                 id: id
             }
         }).then(() => {
-            res.redirect('/pacientes');
+            res.redirect('/pacientes/home');
         });
 }
 
@@ -78,7 +84,7 @@ exports.delete = (req, res, next) => {
             id: id
         }
     }).then(() => {
-        res.redirect('/pacientes');
+        res.redirect('/pacientes/home');
     })
 }
 
@@ -99,10 +105,11 @@ exports.login = (req, res, next) => {
             const deuCerto = bcrypt.compareSync(senha, paciente.senha);
             if (deuCerto) {
                 req.session.login = {
+                    id: paciente.id,
                     nome: paciente.nome
                 }
 
-                res.redirect('/pacientes');
+                res.redirect('/pacientes/home');
             }
             else {
                 res.render('paciente/login', { msg: 'Usuário ou senha inválidos' });

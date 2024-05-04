@@ -5,7 +5,7 @@
 
         <div class="bg-white w-3/12 rounded-md flex flex-col items-center p-8">
 
-            <p class=" font-light text-2xl">CADASTRE-SE JÁ!</p>
+            <p class=" font-light text-2xl">SIGN UP</p>
 
             <form method="post" action="/pacientes" class="w-full flex flex-col items-center gap-8 pt-8"
                 onsubmit="validarSenha(event)">
@@ -42,10 +42,13 @@
                         alt="" class="w-10 bg-gray-200 p-2 rounded-tr-md rounded-br-md">
                 </div>
 
-                <div class="w-full flex items-center justify-center float-end gap-8">
-                    <button type="submit" class="bg-green-500 p-2 text-white rounded-md">Cadastrar</button>
-                    <a href="/pacientes" class="text-red-500">Cancelar</a>
+                <div class="w-full flex items-center justify-center gap-8">
+                    <button type="submit" class="w-full bg-green-500 p-2 text-white rounded-md">Cadastrar</button>
                 </div>
+
+                <p class="text-sm">JÁ TEM UMA CONTA?
+                    <a href="/pacientes/login" class="text-blue-500">LOG IN</a>
+                </p>
 
                 <% if(msg !='' ) { %>
                     <p id="msgErro" class="text-red-500 font-bold">
