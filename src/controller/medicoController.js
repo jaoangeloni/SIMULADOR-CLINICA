@@ -26,6 +26,8 @@ exports.findBySpecId = (req, res, next) => {
 
     }).then(medicos => {
         res.status(200).json({ medicos: medicos })
+    }).catch(err => {
+        res.status(404).json({ error: err });
     })
 }
 

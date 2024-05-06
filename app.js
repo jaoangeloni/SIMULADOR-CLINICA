@@ -58,9 +58,9 @@ database
 
 app.use('/pacientes', pacienteRoute);
 app.use('/medicos', medicoRoute);
-app.use('/exame', exameRoute);
-app.use('/atestado', atestadoRoute);
-app.use('/especializacao', especializacaoRoute);
+app.use('/exames', exameRoute);
+app.use('/atestados', atestadoRoute);
+app.use('/especializacoes', especializacaoRoute);
 
 
 //app.use('/', checkLogin, (req, res, next) => {

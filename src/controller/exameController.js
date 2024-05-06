@@ -3,10 +3,28 @@ const Exame = require('../models/exame');
 const Medico = require('../models/medico');
 const Paciente = require('../models/paciente');
 
+exports.findByPatientId = (req, res, next) => {
+    const pacienteid = req.params.pacienteid;
+
+    Exame.findAll({
+        where: {
+            pacienteId: pacienteid
+        }
+    }).then(exames => {
+        res.status(200).json({ exames: exames });
+    }).catch(err => {
+        res.status(404).json({ error: "Nada encontrado!" });
+    })
+}
+
 exports.create = (req, res, next) => {
-    const data_solicitacao = req.body.data_solicitacao;
-    const pacienteId = req.body.pacienteId;
-    const medicoId = req.body.medicoId;
+    const data_solicitacao = req.body.data;
+    const pacienteId = req.body.paciente;
+    const medicoId = req.body.medicos;
+
+    if (data_solicitacao == '' || data_solicitacao == undefined || data_solicitacao == null) {
+        return res.status(400).json({ error: 'Data inválida!' })
+    }
 
     Medico.findOne({
         where: {
@@ -37,14 +55,9 @@ exports.create = (req, res, next) => {
         pacienteId: pacienteId,
         medicoId: medicoId
     }).then(() => {
-        res.status(201).json({
-            message: 'Exame emitido com sucesso!'
-        })
+        res.redirect('/pacientes/home');
     }).catch(err => {
-        console.error('Error ao emitir o pedido de exame: ', err);
-        res.status(500).json({
-            error: 'Erro!'
-        })
+        res.status(400).json({ error: err });
     })
 }
 

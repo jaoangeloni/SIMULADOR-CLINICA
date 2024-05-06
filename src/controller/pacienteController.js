@@ -42,7 +42,7 @@ exports.create = (req, res, next) => {
                 email: email,
                 senha: senhaCriptografada
             }).then(() => {
-                res.redirect('/pacientes/home');
+                res.redirect('/pacientes/login'), { msg: '' };
             });
         }
         else {

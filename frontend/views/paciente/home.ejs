@@ -11,39 +11,42 @@
 
         <div class="bg-white w-full rounded p-6 flex flex-col gap-4">
             <p class="font-light text-2xl">AGENDAR NOVA CONSULTA</p>
-            <form action="" class="flex items-center justify-start  flex-wrap gap-2">
+
+
+            <form method="post" action="/exames/novo" class="flex items-center justify-start flex-wrap gap-2">
+                <input type="text" id="paciente" name="paciente" class="hidden" value="<%= sessionData.id %>">
 
                 <div class="flex flex-col w-1/4 ">
                     <label for="exames">EXAMES DISPONÍVEIS:</label>
-                    <select name="exames" id="exames" class=" h-12 rounded-md bg-gray-200 outline-none">
+                    <select name="exames" id="exames" class=" h-12 rounded-md bg-gray-200 outline-none p-2">
                         <option disabled selected>SELECIONE UM EXAME</option>
                     </select>
                 </div>
 
                 <div class="flex flex-col w-1/4">
                     <label for="medicos"><span id="especialista">MÉDICOS</span> DISPONÍVEIS:</label>
-                    <select name="medicos" id="medicos" class=" h-12 rounded-md bg-gray-200 outline-none">
+                    <select name="medicos" id="medicos" class=" h-12 rounded-md bg-gray-200 outline-none p-2">
                         <option disabled selected>SELECIONE UM EXAME</option>
                     </select>
                 </div>
 
                 <div class="flex flex-col w-1/4">
-                    <label for="date">SELECIONE UMA DATA:</label>
-                    <input name="date" type="date" class="h-12 rounded-md bg-gray-200 outline-none">
+                    <label for="data">SELECIONE UMA DATA:</label>
+                    <input name="data" id="data" type="date" class="h-12 rounded-md bg-gray-200 outline-none p-2">
                 </div>
 
-                <button type="submit" class=" w-1/4 h-12 bg-green-500 text-white rounded-md">AGENDAR EXAME</button>
+                <button onclick="teste()" type="submit" class=" w-1/4 h-12 bg-green-500 text-white rounded-md">AGENDAR
+                    EXAME</button>
             </form>
         </div>
 
-        <div class="bg-white w-full rounded p-6 flex flex-col gap-4"></div>
+        <div class="bg-white w-full rounded p-6 flex flex-col gap-4" onload="carregarExames()">
+            <p class="font-light text-2xl">SEUS EXAMES</p>
+        </div>
 
     </div>
 
     <script>
-        const selectExame = document.getElementById('exames');
-        const selectMedico = document.getElementById('medicos');
-
         function carregarMedicos(especializacaoId) {
             fetch('/medicos/especializacaoid/' + especializacaoId)
                 .then(response => response.json())
@@ -58,7 +61,14 @@
                 });
         }
 
-        fetch('/especializacao/')
+        function logout() {
+            window.location.href = "/pacientes/login"
+        }
+
+        const selectExame = document.getElementById('exames');
+        const selectMedico = document.getElementById('medicos');
+
+        fetch('/especializacoes/')
             .then(response => response.json())
             .then(data => {
                 data.especializacoes.forEach(especializacao => {
@@ -75,9 +85,15 @@
 
             });
 
-        function logout() {
-            window.location.href = "/pacientes/login"
-        }
+        const paciente = document.getElementById("paciente").value
+        fetch('/exames/paciente/' + paciente)
+            .then(response => response.json())
+            .then(data => {
+                data.exames.forEach(e => {
+
+                })
+            })
+
     </script>
 
     <%- include('../partials/footer.ejs') %>
