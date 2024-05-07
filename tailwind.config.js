@@ -1,12 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./frontend/**/*.{html,ejs}"],
+  content: ["./views/**/*.{html,ejs}"],
 
   theme: {
     extend: {
-      backgroundImage: {
-        "wave": "url('/imgs/wave.svg')"
-      }
     },
   },
   plugins: [],
