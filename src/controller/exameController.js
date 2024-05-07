@@ -2,6 +2,7 @@ const express = require('express');
 const Exame = require('../models/exame');
 const Medico = require('../models/medico');
 const Paciente = require('../models/paciente');
+const Especializacao = require('../models/especializacao');
 
 exports.findByPatientId = (req, res, next) => {
     const pacienteid = req.params.pacienteid;
@@ -17,13 +18,44 @@ exports.findByPatientId = (req, res, next) => {
     })
 }
 
+exports.getEverything = (req, res, next) => {
+    const id = req.params.id
+
+    Exame.findAll({
+        attributes: ['id', 'data_solicitacao'],
+        include: [
+            {
+                model: Paciente,
+                as: 'paciente',
+                attributes: ['id', 'nome']
+            },
+            {
+                model: Medico,
+                as: 'medico',
+                attributes: ['id', 'nome'],
+                include: {
+                    model: Especializacao,
+                    as: 'especializaco',
+                    attributes: ['id', 'nome']
+                }
+            }
+        ],
+        where: {
+            pacienteId: id
+        }
+    }).then(exames => {
+        res.status(200).json({ exames: exames });
+    })
+}
+
+
 exports.create = (req, res, next) => {
     const data_solicitacao = req.body.data;
     const pacienteId = req.body.paciente;
     const medicoId = req.body.medicos;
 
     if (data_solicitacao == '' || data_solicitacao == undefined || data_solicitacao == null) {
-        return res.status(400).json({ error: 'Data inválida!' })
+        return res.redirect('/pacientes/home'), { msg: 'Data inválida' };
     }
 
     Medico.findOne({
@@ -69,6 +101,10 @@ exports.delete = (req, res, next) => {
         where: {
             id: id
         }
-    }).then(console.info("Destruido com sucesso!"));
+    }).then(() => {
+        res.redirect('/pacientes/home');
+    }).catch(err => {
+        res.status(400).json({ error: err });
+    })
 }
 

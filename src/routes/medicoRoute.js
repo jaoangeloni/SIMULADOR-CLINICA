@@ -16,5 +16,4 @@ router.post('/novo', medico.create);
 router.put('/editar', /* checkLogin */ medico.update);
 router.delete('/delete/:id', /*checkLogin, */ medico.delete);
 
-
 module.exports = router;

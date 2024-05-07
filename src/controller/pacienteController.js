@@ -15,7 +15,7 @@ exports.getAll = (req, res, next) => {
 }
 
 exports.renderHome = (req, res, next) => {
-    res.render('paciente/home', { sessionData: req.session.login });
+    res.render('paciente/home', { sessionData: req.session.login, msg: '' });
 }
 
 exports.renderRegistro = (req, res, next) => {
