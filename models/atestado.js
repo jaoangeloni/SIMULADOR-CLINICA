@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const database = require('../../database/database');
+const database = require('../database/database');
 
 const Exame = require('./exame');
 
@@ -18,7 +18,7 @@ const Atestado = database.define('atestados', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    data_emissao : {
+    data_emissao: {
         type: Sequelize.DATE,
         allowNull: false
     }

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const session = require('express-session');
 const database = require('./database/database');
-const checkLogin = require('./src/middlewares/checkLogin')
+const checkLogin = require('./middlewares/checkLogin')
 const path = require('path');
 
 PORT = process.env.PORT || 3000;
@@ -10,7 +10,7 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-app.set('views', path.join(__dirname, './frontend/views/'));
+app.set('views', path.join(__dirname, './views/'));
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -22,26 +22,26 @@ app.use(session({
     saveUninitialized: false
 }));
 
-const pacienteRoute = require('./src/routes/pacienteRoute');
-const medicoRoute = require('./src/routes/medicoRoute');
-const exameRoute = require('./src/routes/exameRoute');
-const atestadoRoute = require('./src/routes/atestadoRoute');
-const especializacaoRoute = require('./src/routes/especializacaoRoute');
-const errorRoute = require('./src/routes/errorRoute');
+const pacienteRoute = require('./routes/pacienteRoute');
+const medicoRoute = require('./routes/medicoRoute');
+const exameRoute = require('./routes/exameRoute');
+const atestadoRoute = require('./routes/atestadoRoute');
+const especializacaoRoute = require('./routes/especializacaoRoute');
+const errorRoute = require('./routes/errorRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.use(express.static(path.join(__dirname, "/dist")));
 
 /*
 //Sincronizacao do banco de dados
 (async () => {
     
-    const Paciente = require('./src/models/paciente');
-    const Especializacao = require('./src/models/especializacao');
-    const Medico = require('./src/models/medico');
-    const Exame = require('./src/models/exame');
-    const Atestado = require('./src/models/atestado');
+    const Paciente = require('./models/paciente');
+    const Especializacao = require('./models/especializacao');
+    const Medico = require('./models/medico');
+    const Exame = require('./models/exame');
+    const Atestado = require('./models/atestado');
 
     await database.sync();
 })() 

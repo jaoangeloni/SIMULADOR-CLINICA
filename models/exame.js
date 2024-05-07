@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const database = require('../../database/database');
+const database = require('../database/database');
 
 const Paciente = require('./paciente');
 const Medico = require('./medico');
@@ -11,7 +11,7 @@ const Exame = database.define('exames', {
         allowNull: false,
         primaryKey: true
     },
-    data_solicitacao : {
+    data_solicitacao: {
         type: Sequelize.DATE,
         allowNull: false
     }
