@@ -27,7 +27,7 @@ const medicoRoute = require('./src/routes/medicoRoute');
 const exameRoute = require('./src/routes/exameRoute');
 const atestadoRoute = require('./src/routes/atestadoRoute');
 const especializacaoRoute = require('./src/routes/especializacaoRoute');
-
+const errorRoute = require('./src/routes/errorRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -61,6 +61,9 @@ app.use('/medicos', medicoRoute);
 app.use('/exames', exameRoute);
 app.use('/atestados', atestadoRoute);
 app.use('/especializacoes', especializacaoRoute);
+
+//aqi
+app.use(errorRoute);
 
 
 //app.use('/', checkLogin, (req, res, next) => {

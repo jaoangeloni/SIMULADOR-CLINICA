@@ -3,11 +3,15 @@
     <div class="bg-blue-500 min-h-screen h-full p-10 flex flex-col gap-10">
 
         <div class="bg-white w-full rounded p-6 flex justify-between items-center gap-4">
-            <h1 class="font-light text-2xl">Seja bem vindo, <%= sessionData.nome %>!</h1>
-            <img class="w-8 cursor-pointer" src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
-                onclick="logout()">
-        </div>
+            <h1 class="font-light text-2xl">Seja bem vindo, <%= sessionData.nome%>!</h1>
 
+            <div class="flex items-center"> <a href="<%= sessionData.nome %>!"><img class="w-5 cursor-pointer mr-2"
+                        src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"></a>
+                <img class="w-5 cursor-pointer"
+                    src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Configuration-2-01-1024.png"
+                    onclick="edit()">
+            </div>
+        </div>
 
         <div class="bg-white w-full rounded p-6 flex flex-col gap-4">
             <p class="font-light text-2xl">AGENDAR NOVA CONSULTA</p>
@@ -51,7 +55,7 @@
         </div>
 
         <div id="listaExames" class="bg-white w-full rounded p-6 flex flex-col gap-4">
-            <p class="font-light text-2xl">SEUS ATESTADOS</p>
+            <p class="font-light text-2xl">RESPOSTAS DE EXAMES</p>
         </div>
     </div>
 

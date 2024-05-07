@@ -1,0 +1,22 @@
+<%- include('../partials/head.ejs') %>
+    <div class="h-screen w-screen bg-red-500 flex flex-col items-center justify-center">
+        <p class="text-6xl text-white font-bold">ERRO</p>
+        <p class="text-white">Redirecionando em <span id="tempo">5</span></p>
+    </div>
+
+    <script>
+        const tempo = document.getElementById("tempo");
+        let countDown = 5;
+
+        const intervalId = setInterval(() => {
+            countDown--;
+            tempo.innerHTML = countDown;
+
+            if (countDown == 0) {
+                window.location.href = "/pacientes/login";
+            }
+        }, 1000);
+
+    </script>
+
+    <%- include('../partials/footer.ejs') %>
