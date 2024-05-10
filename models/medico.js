@@ -24,7 +24,11 @@ const Medico = database.define('medicos', {
     }
 })
 
-Medico.belongsTo(Especializacao);
+Medico.belongsTo(Especializacao, {
+    foreignKey: {
+    name: 'especializacaoId',
+    allowNull: false
+    }});
 
 
 module.exports = Medico;

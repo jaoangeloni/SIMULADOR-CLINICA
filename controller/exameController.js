@@ -16,7 +16,7 @@ exports.findByPatientId = (req, res, next) => {
     }).catch(err => {
         res.status(404).json({ error: "Nada encontrado!" });
     })
-}
+}      
 
 exports.getEverything = (req, res, next) => {
     const id = req.params.id
@@ -35,7 +35,6 @@ exports.getEverything = (req, res, next) => {
                 attributes: ['id', 'nome'],
                 include: {
                     model: Especializacao,
-                    as: 'especializaco',
                     attributes: ['id', 'nome']
                 }
             }

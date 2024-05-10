@@ -1,41 +1,53 @@
 <%- include('../partials/head.ejs') %>
 
-    <div class="bg-blue-500 h-screen flex items-center justify-center">
+    <div class=" bg-white h-screen flex items-center justify-center">
 
-        <div class="bg-white w-3/12 rounded-md flex flex-col items-center p-8">
+        <div class="bg-white w-3/4 h-5/6 flex justify-between rounded-md drop-shadow-drop">
 
-            <p class=" font-light text-2xl">LOG IN</p>
+            <div class=" w-2/5 p-6 flex flex-col gap-6">
 
-            <form method="post" action="/pacientes/login" class="w-full flex flex-col items-center gap-8 pt-8">
+                <p class=" font-light text-2xl">System<span class="text-blue-500 font-bold">Med</span></p>
 
-                <div class="flex w-full">
-                    <input type="email" name="email" id="email"
-                        class="bg-gray-200 w-full outline-none p-2 rounded-tl-md rounded-bl-md" placeholder="E-mail"
-                        required>
-                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-email-2029111-1713291.png?f=webp"
-                        class="w-10 bg-gray-200 p-2 rounded-tr-md rounded-br-md">
-                </div>
+                <p class=" font-light text-4xl text-blue-500">Olá,<br><span class="font-bold text-5xl">bem
+                        vindo!</span></p>
 
-                <div class="flex w-full">
-                    <input type="password" name="senha" id="senha"
-                        class="bg-gray-200 w-full outline-none p-2 rounded-tl-md rounded-bl-md" placeholder="Senha"
-                        required>
-                    <img src="https://icons.veryicon.com/png/o/miscellaneous/remitting-country-linear-icon/password-148.png"
-                        class="w-10 bg-gray-200 p-2 rounded-tr-md rounded-br-md">
-                </div>
+                <form method="post" action="/pacientes/login"
+                    class="w-full flex flex-col items-center justify-center gap-8 pt-8">
 
-                <button type="submit" class="bg-green-500 p-2 text-white rounded-md w-full">Login</button>
+                    <div class="flex w-full">
+                        <input type="email" name="email" id="email"
+                            class="bg-gray-200 w-full outline-none p-2 border-b-4 border-b-blue-500"
+                            placeholder="E-mail" required>
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-email-2029111-1713291.png?f=webp"
+                            class="w-10 bg-gray-200 p-2 rounded-tr-md rounded-br-md">
+                    </div>
 
-                <p class="text-sm">NÃO TEM UMA CONTA? <a href="/pacientes/registro"
-                        class="text-blue-500">REGISTRE-SE</a>
-                </p>
+                    <div class="flex w-full">
+                        <input type="password" name="senha" id="senha"
+                            class="bg-gray-200 w-full outline-none p-2 border-b-4 border-b-blue-500" placeholder="Senha"
+                            required>
+                        <img src="https://icons.veryicon.com/png/o/miscellaneous/remitting-country-linear-icon/password-148.png"
+                            class="w-10 bg-gray-200 p-2 rounded-tr-md rounded-br-md">
+                    </div>
 
-                <% if(msg !='' ) { %>
-                    <p id="msgErro" class="text-red-500 font-bold">
-                        <%= msg %>
+                    <button type="submit" class="bg-green-500 p-2 text-white rounded-md w-full">Login</button>
+
+                    <p class="text-sm">Não tem uma conta? <a href="/pacientes/registro"
+                            class="text-blue-500 font-bold">Registre-se</a>
                     </p>
-                    <% }%>
 
+                    <% if(msg !='' ) { %>
+                        <p id="msgErro" class="text-red-500 font-bold">
+                            <%= msg %>
+                        </p>
+                        <% }%>
+                </form>
+            </div>
+
+            <div class="w-3/5
+                bg-[url('https://www.rockfordhealthsystem.org/wp-content/uploads/2021/02/How-Many-Hours-A-Week-Do-Doctors-Work.jpg')]
+                bg-cover rounded-tr-md rounded-br-md bg-right">
+            </div>
             </form>
         </div>
     </div>

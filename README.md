@@ -19,3 +19,15 @@ No terminal, utilize o seguinte comando para rodar o servidor e buildar o front:
 ```
 npm run dev
 ```
+
+
+Para obter as telas do banco de dados execute o comando: 
+```
+npx sequelize-cli db:migrate
+```
+
+Para popular as tabelas após as migrations, digite o comando:
+```
+npx sequelize-cli db:seed:all
+```
+

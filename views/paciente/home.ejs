@@ -64,6 +64,7 @@
             fetch('/medicos/especializacaoid/' + especializacaoId)
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data)
                     selectMedico.innerHTML = "";
 
                     data.medicos.forEach(medico => {

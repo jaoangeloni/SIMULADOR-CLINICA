@@ -21,7 +21,7 @@ exports.findBySpecId = (req, res, next) => {
 
     Medico.findAll({
         where: {
-            especializacoId: especializacaoid
+            especializacaoId: especializacaoid
         }
 
     }).then(medicos => {
@@ -38,10 +38,10 @@ exports.create = (req, res, next) => {
     const nome = req.body.nome;
     const email = req.body.email;
     const senha = req.body.senha;
-    const especializacoId = req.body.especializacoId;
+    const especializacaoId = req.body.especializacaoId;
     Especializacao.findOne({
         where: {
-            id: especializacoId
+            id: especializacaoId
         }
     })
         .then(especializacao => {
@@ -53,7 +53,7 @@ exports.create = (req, res, next) => {
                 nome: nome,
                 email: email,
                 senha: senha,
-                especializacoId: especializacoId // Corrigido para usar especializacaoId
+                especializacaoId: especializacaoId // Corrigido para usar especializacaoId
             })
                 .then(() => {
                     res.status(201).json({ message: 'Médico criado com sucesso' });
