@@ -1,5 +1,7 @@
 const express = require('express');
 const Exame = require('../models/exame');
+const Paciente = require('../models/paciente');
+const Medico = require('../models/medico');
 const Atestado = require('../models/atestado');
 
 
@@ -17,16 +19,13 @@ exports.getMegaSelect = (req, res, next) => {
                         model: Paciente,
                         attributes: ['id', 'nome'],
                         where: {
-                            id: pacienteId
+                            pacienteId: pacienteId
                         }
+
                     },
                     {
                         model: Medico,
                         attributes: ['id', 'nome'],
-                        include: {
-                            model: Especializacao,
-                            attributes: ['id', 'nome']
-                        }
                     }
                 ]
             }
@@ -85,4 +84,3 @@ exports.delete = (req, res, next) => {
         }
     }).then(console.info("Atestado deletado com sucesso!"));
 }
-
