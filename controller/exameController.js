@@ -16,7 +16,31 @@ exports.findByPatientId = (req, res, next) => {
     }).catch(err => {
         res.status(404).json({ error: "Nada encontrado!" });
     })
-}      
+}
+
+exports.findByMedicoId = (req, res, next) => {
+    const medicoId = req.params.medicoId;
+    Exame.findAll({
+        attributes: ['id', 'data_solicitacao'],
+        include: [
+            {
+                model: Paciente,
+                as: 'paciente',
+                attributes: ['id', 'nome']
+            },
+            {
+                model: Medico,
+                as: 'medico',
+                attributes: ['id', 'nome'],
+            }
+        ],
+        where: {
+            medicoId: medicoId
+        }
+    }).then(exames => {
+        res.status(200).json({ exames: exames });
+    })
+}
 
 exports.getEverything = (req, res, next) => {
     const id = req.params.id

@@ -1,8 +1,8 @@
 <%- include('../partials/head.ejs') %>
 
-    <div class="bg-blue-500 min-h-screen h-full p-10 flex flex-col gap-10">
+    <div class="bg-white min-h-screen h-full p-10 flex flex-col gap-10">
 
-        <div class="bg-white w-full rounded p-6 flex justify-between items-center gap-4">
+        <div class="bg-gray-200 w-full rounded p-6 flex justify-between items-center gap-4">
             <h1 class="font-light text-2xl">Seja bem vindo, <%= sessionData.nome%>!</h1>
 
             <div class="flex items-center"> <a href="<%= sessionData.nome %>!"><img class="w-5 cursor-pointer mr-2"
@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="bg-white w-full rounded p-6 flex flex-col gap-4">
+        <div class="bg-gray-200 w-full rounded p-6 flex flex-col gap-4">
             <p class="font-light text-2xl">AGENDAR NOVA CONSULTA</p>
 
 
@@ -22,21 +22,21 @@
 
                 <div class="flex flex-col w-1/4 ">
                     <label for="exames">EXAMES DISPONÍVEIS:</label>
-                    <select name="exames" id="exames" class=" h-12 rounded-md bg-gray-200 outline-none p-2">
+                    <select name="exames" id="exames" class=" h-12 rounded-md bg-white outline-none p-2">
                         <option disabled selected>SELECIONE UM EXAME</option>
                     </select>
                 </div>
 
                 <div class="flex flex-col w-1/4">
                     <label for="medicos"><span id="especialista">MÉDICOS</span> DISPONÍVEIS:</label>
-                    <select name="medicos" id="medicos" class=" h-12 rounded-md bg-gray-200 outline-none p-2">
+                    <select name="medicos" id="medicos" class=" h-12 rounded-md bg-white outline-none p-2">
                         <option disabled selected>SELECIONE UM EXAME</option>
                     </select>
                 </div>
 
                 <div class="flex flex-col w-1/4">
                     <label for="data">SELECIONE UMA DATA:</label>
-                    <input name="data" id="data" type="date" class="h-12 rounded-md bg-gray-200 outline-none p-2">
+                    <input name="data" id="data" type="date" class="h-12 rounded-md bg-white outline-none p-2">
                 </div>
 
                 <button type="submit" class=" w-1/4 h-12 bg-green-500 text-white rounded-md">AGENDAR
@@ -50,11 +50,11 @@
             </form>
         </div>
 
-        <div id="listaExames" class="bg-white w-full rounded p-6 flex flex-col gap-4">
+        <div id="listaExames" class="bg-gray-200 w-full rounded p-6 flex flex-col gap-4">
             <p class="font-light text-2xl">SEUS EXAMES</p>
         </div>
 
-        <div id="listaExames" class="bg-white w-full rounded p-6 flex flex-col gap-4">
+        <div id="listaExames" class="bg-gray-200 w-full rounded p-6 flex flex-col gap-4">
             <p class="font-light text-2xl">RESPOSTAS DE EXAMES</p>
         </div>
     </div>
@@ -64,9 +64,7 @@
             fetch('/medicos/especializacaoid/' + especializacaoId)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     selectMedico.innerHTML = "";
-
                     data.medicos.forEach(medico => {
                         const option = new Option(medico.nome, medico.id);
                         selectMedico.add(option);
@@ -107,16 +105,17 @@
             .then(data => {
                 data.exames.forEach(e => {
                     const div = document.createElement('div');
-                    div.classList = ("bg-gray-200 p-2 rounded-md")
+                    div.classList = ("bg-white p-4 rounded-sm flex flex-col justify-between h-32 border-b-4 border-b-blue-500")
 
                     div.innerHTML = `
                         <div class="flex justify-between items-center">
-                            <p class="">${e.medico.especializaco.nome} - ${e.data_solicitacao.substring(0, 10)}</p>
-                            <p class="">${e.medico.nome}</p>
+                            <p class="text-xl"><span class="font-bold">${e.medico.especializaco.nome}</span> | ${e.medico.nome}</p>
+                            <p class="">${e.data_solicitacao.substring(0, 10)}</p>
                         </div>
 
                         <div class="flex gap-2">
-                            <button onclick="deletarExame(${e.id})" class="bg-red-500 rounded-md  text-white p-2">CANCELAR</button>
+                            <button onclick="deletarExame(${e.id})" class="bg-yellow-500 rounded-md text-white p-2">ALTERAR DATA</button>
+                            <button onclick="deletarExame(${e.id})" class="bg-red-500 rounded-md text-white p-2">DESMARCAR EXAME</button>
                         </div>
                     `
                     listaExames.appendChild(div);

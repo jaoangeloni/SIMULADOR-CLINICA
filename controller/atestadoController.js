@@ -2,10 +2,49 @@ const express = require('express');
 const Exame = require('../models/exame');
 const Atestado = require('../models/atestado');
 
+
+exports.getMegaSelect = (req, res, next) => {
+    const pacienteId = req.params.id;
+
+    Atestado.findAll({
+        attributes: ['id', 'diagnostico', 'orientacao', 'data_emissao'],
+        include: [
+            {
+                model: Exame,
+                attributes: ['id'],
+                include: [
+                    {
+                        model: Paciente,
+                        attributes: ['id', 'nome'],
+                        where: {
+                            id: pacienteId
+                        }
+                    },
+                    {
+                        model: Medico,
+                        attributes: ['id', 'nome'],
+                        include: {
+                            model: Especializacao,
+                            attributes: ['id', 'nome']
+                        }
+                    }
+                ]
+            }
+        ]
+    })
+        .then(atestados => {
+            res.status(200).json({ atestados: atestados });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+};
+
+
 exports.create = (req, res, next) => {
     const diagnostico = req.body.diagnostico;
     const orientacao = req.body.orientacao;
-    const data_emissao = req.body.data_emissao;
     const exameId = req.body.exameId;
 
     Exame.findOne({
@@ -20,16 +59,14 @@ exports.create = (req, res, next) => {
         }
     })
 
-
     Atestado.create({
         diagnostico: diagnostico,
         orientacao: orientacao,
-        data_emissao: data_emissao,
         exameId: exameId
     }).then(() => {
-        res.status(201).json({
-            message: 'Atestado emitido com sucesso!'
-        })
+        res.status(201).json;
+        res.redirect('/medicos/home');
+
     }).catch(err => {
         console.error('Error ao emitir atestado... - ', err);
         res.status(500).json({

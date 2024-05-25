@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const database = require('../database/database');
 
 const Exame = require('./exame');
+const { now } = require('sequelize/lib/utils');
 
 const Atestado = database.define('atestados', {
     id: {
@@ -20,7 +21,8 @@ const Atestado = database.define('atestados', {
     },
     data_emissao: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     }
 })
 

@@ -107,7 +107,11 @@ exports.delete = (req, res, next) => {
 }
 
 exports.renderLogin = (req, res, next) => {
-    res.render('login', { msg: '' });
+    res.render('medico/login', { msg: '' });
+}
+
+exports.renderHome = (req, res, next) => {
+    res.render('medico/home', { sessionData: req.session.login, msg: '' });
 }
 
 exports.login = (req, res, next) => {
@@ -123,10 +127,11 @@ exports.login = (req, res, next) => {
             const deuCerto = bcrypt.compareSync(senha, medico.senha);
             if (deuCerto) {
                 req.session.login = {
+                    id: medico.id,
                     nome: medico.nome
                 }
 
-                res.redirect('/');
+                res.redirect('/medicos/home');
             }
             else {
                 res.render('login', { msg: 'Usuário ou senha inválidos' });

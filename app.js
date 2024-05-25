@@ -33,20 +33,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "/dist")));
 
-/*
-//Sincronizacao do banco de dados
-(async () => {
-    
-    const Paciente = require('./models/paciente');
-    const Especializacao = require('./models/especializacao');
-    const Medico = require('./models/medico');
-    const Exame = require('./models/exame');
-    const Atestado = require('./models/atestado');
-
-    await database.sync();
-})() 
-*/
-
 database
     .authenticate()
     .then(() => {
