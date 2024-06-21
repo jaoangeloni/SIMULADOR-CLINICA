@@ -5,23 +5,16 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const pacientes = [
       {
-        nome: 'Carlos',
-        email: 'carlos@example.com',
+        nome: 'João',
+        email: 'joao@example.com',
         senha: 'senha123',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        nome: 'Ana',
-        email: 'ana@example.com',
+        nome: 'Eder',
+        email: 'eder@example.com',
         senha: 'senha456',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        nome: 'Pedro',
-        email: 'pedro@example.com',
-        senha: 'senha789',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -124,28 +124,12 @@
             })
 
 
-
-        fetch('/exames/paciente/' + paciente)
+        fetch('/atestados/' + paciente)
             .then(response => response.json())
             .then(data => {
-                data.exames.forEach(e => {
-                    const div = document.createElement('div');
-                    div.classList = ("bg-white p-4 rounded-sm flex flex-col justify-between h-32 border-b-4 border-b-blue-500")
-
-                    div.innerHTML = `
-                        <div class="flex justify-between items-center">
-                            <p class="text-xl"><span class="font-bold">${e.medico.especializaco.nome}</span> | ${e.medico.nome}</p>
-                            <p class="">${e.data_solicitacao.substring(0, 10)}</p>
-                        </div>
-
-                        <div class="flex gap-2">
-                            <button onclick="deletarExame(${e.id})" class="bg-yellow-500 rounded-md text-white p-2">ALTERAR DATA</button>
-                            <button onclick="deletarExame(${e.id})" class="bg-red-500 rounded-md text-white p-2">DESMARCAR EXAME</button>
-                        </div>
-                    `
-                    listaAtestados.appendChild(div);
-                })
+                console.log(data)
             })
+
 
         function deletarExame(id) {
             fetch(`/exames/delete/${id}`, {
@@ -154,6 +138,8 @@
                 window.location.reload()
             })
         }
+
+
     </script>
 
     <%- include('../partials/footer.ejs') %>

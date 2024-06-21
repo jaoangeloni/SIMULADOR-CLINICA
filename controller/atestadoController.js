@@ -5,7 +5,7 @@ const Medico = require('../models/medico');
 const Atestado = require('../models/atestado');
 
 
-exports.getMegaSelect = (req, res, next) => {
+exports.findByPatientId = (req, res, next) => {
     const pacienteId = req.params.id;
 
     Atestado.findAll({
@@ -21,7 +21,6 @@ exports.getMegaSelect = (req, res, next) => {
                         where: {
                             pacienteId: pacienteId
                         }
-
                     },
                     {
                         model: Medico,
@@ -63,9 +62,9 @@ exports.create = (req, res, next) => {
         orientacao: orientacao,
         exameId: exameId
     }).then(() => {
+        alterarStatus(exameId)
         res.status(201).json;
         res.redirect('/medicos/home');
-
     }).catch(err => {
         console.error('Error ao emitir atestado... - ', err);
         res.status(500).json({
@@ -83,4 +82,25 @@ exports.delete = (req, res, next) => {
             id: id
         }
     }).then(console.info("Atestado deletado com sucesso!"));
+}
+
+function alterarStatus(id) {
+    try {
+        const exame = Exame.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!exame) {
+            throw new Error('Exame não encontrado');
+        }
+
+        Exame.update(
+            { atendido: 1 },
+            { where: { id: id } }
+        );
+    } catch (error) {
+        console.error("Erro ao pesquisar exame");
+    }
 }

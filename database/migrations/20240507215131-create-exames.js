@@ -13,6 +13,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      atendido:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+      },
       pacienteId: {
         type: Sequelize.INTEGER,
         allowNull: false,

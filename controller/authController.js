@@ -37,6 +37,7 @@ const login = async (req, res) => {
 
         if (!usuario) {
             usuario = await Medico.findOne({ where: { email: req.body.email } });
+    
         }
 
         if (!usuario) {
@@ -62,14 +63,18 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign({ name: usuario.nome }, SECRET);
+        
+        req.session.login = {
+            id: usuario.id,
+            nome: usuario.nome
+        }
 
-        res.status(200).json({
-            statusCode: 200,
-            message: "Login realizado com sucesso!",
-            data: {
-                token
-            }
-        });
+        if(usuario.especializacaoId){
+            res.redirect('/medicos/home');
+        }else{
+            res.redirect('/pacientes/home');
+        }
+
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -79,7 +84,9 @@ const login = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
     login,
-    verificarToken
+    verificarToken,
 };

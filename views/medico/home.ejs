@@ -23,54 +23,57 @@
         const medicoId = document.getElementById("medico").value
         const listaExames = document.getElementById("listaExames");
 
+
         fetch('/exames/medico/' + medicoId)
             .then(response => response.json())
             .then(data => {
                 listaExames.innerHTML = '<p class="font-light text-2xl">PACIENTES A SEREM ATENDIDOS</p>'
                 data.exames.forEach(exame => {
-                    const div = document.createElement('div');
-                    div.classList = ("bg-white rounded-md")
+                    console.log(exame)
+                    if (exame.atendido == 0) {
+                        const div = document.createElement('div');
+                        div.classList = ("bg-white rounded-md")
 
-                    div.innerHTML = `
-                    <div class="p-2 flex flex-col" onclick="diplayToggle()">
-                        <div class="flex justify-between items-center">
-                            <p class="text-xl font-bold">${exame.paciente.nome}</p>
-                            <p>${exame.data_solicitacao.substring(0, 10)}</p>
+                        div.innerHTML = `
+                        <div class="p-2 flex flex-col" onclick="diplayToggle()">
+                            <div class="flex justify-between items-center">
+                                <p class="text-xl font-bold">${exame.paciente.nome}</p>
+                                <p>${exame.data_solicitacao.substring(0, 10)}</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="w-full flex flex-col gap-2 bg-white p-2 rounded-bl-md rounded-br-md">
-                        <form method="post" action="/atestados/novo" class="flex flex-col gap-2">
-                            <div class="w-full flex gap-2">
-                                <div class="flex flex-col w-1/4">
-                                    <label for="diagnostico">DIAGNÓSTICO</label>
-                                    <input type="text" name="diagnostico" id="diagnostico"
-                                        class="p-2 h-12 outline-none border-b-4 rounded-sm border-red-500 bg-gray-200"
-                                        placeholder="DIAGNÓSTICO">
+                        <div class="w-full flex flex-col gap-2 bg-white p-2 rounded-bl-md rounded-br-md">
+                            <form method="post" action="/atestados/novo" class="flex flex-col gap-2">
+                                <div class="w-full flex gap-2">
+                                    <div class="flex flex-col w-1/4">
+                                        <label for="diagnostico">DIAGNÓSTICO</label>
+                                        <input type="text" name="diagnostico" id="diagnostico"
+                                            class="p-2 h-12 outline-none border-b-4 rounded-sm border-red-500 bg-gray-200"
+                                            placeholder="DIAGNÓSTICO">
+                                    </div>
+                                    <div class="flex flex-col w-3/4">
+                                        <label for="diagnostico">ORIENTAÇÕES</label>
+                                        <input type="text" name="orientacao" id="orientacao"
+                                            class="p-2 h-12 outline-none border-b-4 rounded-sm border-red-500 bg-gray-200"
+                                            placeholder="ORIENTAÇÕES">
+                                    </div>
+                                    <input type="text" name="exameId" id="exameId" class="hidden position absolute" value="${exame.id}">    
                                 </div>
-                                <div class="flex flex-col w-3/4">
-                                    <label for="diagnostico">ORIENTAÇÕES</label>
-                                    <input type="text" name="orientacao" id="orientacao"
-                                        class="p-2 h-12 outline-none border-b-4 rounded-sm border-red-500 bg-gray-200"
-                                        placeholder="ORIENTAÇÕES">
-                                </div>
-                                <input type="text" name="exameId" id="exameId" class="hidden position absolute" value="${exame.id}">    
-                            </div>
- 
-                            <div class="flex gap-2 ">
-                                <button type="submit" class="bg-green-500 rounded-md  text-white p-2 h-12">ENVIAR
-                                    ATESTADO</button>
-                                <button onclick="deletarExame(${exame.id})" class="bg-red-500 rounded-md  text-white p-2 h-12">CANCELAR EXAME</button>
-                            </div>
-                        </form>
-                    </div>
-                    `
 
-                    listaExames.appendChild(div);
+                                <div class="flex gap-2 ">
+                                    <button type="submit" class="bg-green-500 rounded-md  text-white p-2 h-12">ENVIAR
+                                        ATESTADO</button>
+                                    <button onclick="deletarExame(${exame.id})" class="bg-red-500 rounded-md  text-white p-2 h-12">CANCELAR EXAME</button>
+                                </div>
+                            </form>
+                        </div>
+                        `
+                        listaExames.appendChild(div);
+                    }
                 });
 
-
             });
+
 
 
 

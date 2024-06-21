@@ -6,6 +6,7 @@ const checkLogin = require('../middlewares/checkLogin');
 const authController = require('../controller/authController');
 
 router.post('/login', authController.login);
+router.get('/login', medico.renderLogin);
 //router.post()
 router.get('/home', checkLogin, medico.renderHome);
 router.get('/todos', authController.verificarToken, medico.getAll);

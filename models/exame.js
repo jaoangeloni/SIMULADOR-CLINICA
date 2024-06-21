@@ -14,8 +14,15 @@ const Exame = database.define('exames', {
     data_solicitacao: {
         type: Sequelize.DATE,
         allowNull: false
+    },
+    atendido: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
     }
 })
+
+
 
 Exame.belongsTo(Paciente);
 Exame.belongsTo(Medico);
