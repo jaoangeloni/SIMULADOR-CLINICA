@@ -6,8 +6,11 @@ const authController = require('../controller/authController');
 const checkLogin = require('../middlewares/checkLogin');
 
 router.post('/login', authController.login);
-
 router.get('/login', paciente.renderLogin);
+
+router.get('/logout', authController.logout);
+router.get('/logout', paciente.renderLogin);
+
 router.get('/home', checkLogin, paciente.renderHome);
 
 router.get('/registro', paciente.renderRegistro);

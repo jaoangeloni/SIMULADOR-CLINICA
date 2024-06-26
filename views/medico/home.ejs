@@ -5,8 +5,14 @@
         <div class="bg-gray-200 w-full rounded p-6 flex justify-between items-center gap-4">
             <h1 class="font-light text-2xl">Seja bem vindo, Dr. <%= sessionData.nome %>!</h1>
 
-            <div class="flex items-center"> <a href="<%= sessionData.nome %>!"><img class="w-5 cursor-pointer mr-2"
-                        src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"></a>
+            <div class="flex items-center">
+                <!----  <form id="logoutForm" action="pacientes/logout" method="POST" style="display: none;"></form> -->
+                <a href="logout" onclick="document.getElementById('logoutForm').submit();">
+                    <img class="w-5 cursor-pointer mr-2"
+                        src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png">
+                </a>
+
+                <!-- Botão de Configurações -->
                 <img class="w-5 cursor-pointer"
                     src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Configuration-2-01-1024.png"
                     onclick="edit()">

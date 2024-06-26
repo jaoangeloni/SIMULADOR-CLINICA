@@ -37,56 +37,61 @@ const login = async (req, res) => {
 
         if (!usuario) {
             usuario = await Medico.findOne({ where: { email: req.body.email } });
-    
+
         }
 
         if (!usuario) {
-            return res.status(401).json({
-                statusCode: 401,
-                message: "Usuário não encontrado!",
-                data: {
-                    email: req.body.email
-                }
-            });
+            res.render('paciente/login', { msg: 'Usuário ou senha inválidos' });
         }
 
         const validacaoPassword = bcrypt.compareSync(req.body.senha, usuario.senha);
 
         if (!validacaoPassword) {
-            return res.status(401).json({
-                statusCode: 401,
-                message: "Não autorizado!",
-                data: {
-                    email: req.body.email
-                }
-            });
+            res.render('paciente/login', { msg: 'Usuário ou senha inválidos' });
         }
 
         const token = jwt.sign({ name: usuario.nome }, SECRET);
-        
+
         req.session.login = {
             id: usuario.id,
-            nome: usuario.nome
+            nome: usuario.nome,
+            tipo: usuario.especializacaoId ? 'medico' : 'paciente'
         }
 
-        if(usuario.especializacaoId){
+        if (usuario.especializacaoId) {
             res.redirect('/medicos/home');
-        }else{
+        } else {
             res.redirect('/pacientes/home');
         }
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            statusCode: 500,
-            messageError: error.message
-        });
+        res.render('paciente/login', { msg: 'Usuário ou senha inválidos' });
     }
 };
+
+const logout = (req, res) => {
+    const isMedico = req.session.login && req.session.login.tipo === 'medico';
+
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({
+                statusCode: 500,
+                message: "Erro ao fazer logout",
+            });
+        }
+        if (isMedico) {
+            res.redirect('/medicos/login');
+        } else {
+            res.redirect('/pacientes/login');
+        }
+    });
+};
+
 
 
 
 module.exports = {
     login,
     verificarToken,
+    logout
 };

@@ -8,8 +8,9 @@ const Atestado = require('../models/atestado');
 exports.findByPatientId = (req, res, next) => {
     const pacienteId = req.params.id;
 
+
     Atestado.findAll({
-        attributes: ['id', 'diagnostico', 'orientacao', 'data_emissao'],
+        attributes: ['id', 'diagnostico', 'orientacao', 'data_emissao', 'exameId'],
         include: [
             {
                 model: Exame,
@@ -19,14 +20,17 @@ exports.findByPatientId = (req, res, next) => {
                         model: Paciente,
                         attributes: ['id', 'nome'],
                         where: {
-                            pacienteId: pacienteId
+                            id: pacienteId
                         }
                     },
                     {
                         model: Medico,
                         attributes: ['id', 'nome'],
                     }
-                ]
+                ],
+                where: {
+                    id: 
+                }
             }
         ]
     })
