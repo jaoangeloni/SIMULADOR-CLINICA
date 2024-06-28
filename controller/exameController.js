@@ -19,6 +19,12 @@ exports.findByPatientId = (req, res, next) => {
                 model: Medico,
                 as: 'medico',
                 attributes: ['id', 'nome'],
+                include: [
+                    {
+                        model: Especializacao,
+                        attributes: ['nome']
+                    }
+                ]
             }
 
         ],

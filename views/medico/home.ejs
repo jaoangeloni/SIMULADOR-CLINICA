@@ -35,7 +35,6 @@
             .then(data => {
                 listaExames.innerHTML = '<p class="font-light text-2xl">PACIENTES A SEREM ATENDIDOS</p>'
                 data.exames.forEach(exame => {
-                    console.log(exame)
                     if (exame.atendido == 0) {
                         const div = document.createElement('div');
                         div.classList = ("bg-white rounded-md")
