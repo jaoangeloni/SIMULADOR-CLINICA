@@ -8,6 +8,20 @@ exports.findByPatientId = (req, res, next) => {
     const pacienteid = req.params.pacienteid;
 
     Exame.findAll({
+        attributes: ['id', 'data_solicitacao', 'atendido'],
+        include: [
+            {
+                model: Paciente,
+                as: 'paciente',
+                attributes: ['id', 'nome']
+            },
+            {
+                model: Medico,
+                as: 'medico',
+                attributes: ['id', 'nome'],
+            }
+
+        ],
         where: {
             pacienteId: pacienteid
         }

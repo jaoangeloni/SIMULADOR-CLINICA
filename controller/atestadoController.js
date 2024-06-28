@@ -3,6 +3,7 @@ const Exame = require('../models/exame');
 const Paciente = require('../models/paciente');
 const Medico = require('../models/medico');
 const Atestado = require('../models/atestado');
+const Especializacao = require('../models/especializacao');
 
 
 exports.findByPatientId = (req, res, next) => {
@@ -17,22 +18,22 @@ exports.findByPatientId = (req, res, next) => {
                 attributes: ['id'],
                 include: [
                     {
-                        model: Paciente,
-                        attributes: ['id', 'nome'],
-                        where: {
-                            id: pacienteId
-                        }
-                    },
-                    {
                         model: Medico,
                         attributes: ['id', 'nome'],
+                        include: [
+                            {
+                                model: Especializacao,
+                                attributes: ['nome']
+                            }
+                        ]
                     }
                 ],
-                where: {
-                    id: 
-                }
+
             }
-        ]
+        ],
+        where: {
+            '$Exame.pacienteId$': pacienteId
+        }
     })
         .then(atestados => {
             res.status(200).json({ atestados: atestados });

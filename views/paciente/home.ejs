@@ -111,6 +111,7 @@
             .then(response => response.json())
             .then(data => {
                 data.exames.forEach(e => {
+                    console.log(e)
                     const div = document.createElement('div');
                     div.classList = ("bg-white p-4 rounded-sm flex flex-col justify-between h-32 border-b-4 border-b-blue-500")
 
@@ -139,9 +140,14 @@
                     div.classList = ("bg-white p-4 rounded-sm flex flex-col justify-between h-32 border-b-4 border-b-blue-500")
 
                     div.innerHTML = `
-                        <div class="flex justify-between items-center">
-                            <p class="text-xl"><span class="">Diagnóstico: ${e.diagnostico}</span> <br>Orientações: ${e.orientacao}</p>
-                            <p class="">Emitido em: ${e.data_emissao.substring(0, 10)}</p>
+                        <div class="flex justify-between items-start flex-col gap-2">
+                            <div class="flex items-center justify-between">
+                                <p class="text-xl"><span class="font-bold">${e.exame.medico.especializaco.nome}</span>| ${e.exame.medico.nome}</p>
+                                <p class="">Emitido em: ${e.data_emissao.substring(0, 10)}</p>
+                            </div>
+                            <p class="text-xl"><span class="font-bold">Diagnóstico:</span> ${e.diagnostico}</p> 
+                            <p class="text-xl"><span class="font-bold">Orientações:</span> ${e.orientacao}</p>
+
                         </div>
 
                     `
